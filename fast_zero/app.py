@@ -18,7 +18,8 @@ def read_root():
 
 @app.post('/users/', status_code=201, response_model=schemas.UserPublic)
 def create_user(
-    user: schemas.UserSchema, session: Session = Depends(get_session),
+    user: schemas.UserSchema,
+    session: Session = Depends(get_session),
 ):
     db_user = session.scalar(
         select(models.User).where(models.User.username == user.username)
@@ -30,7 +31,9 @@ def create_user(
         )
 
     db_user = models.User(
-        username=user.username, password=user.password, email=user.email,
+        username=user.username,
+        password=user.password,
+        email=user.email,
     )
     session.add(db_user)
     session.commit()

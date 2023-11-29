@@ -9,7 +9,9 @@ def test_root_deve_retornar_200_e_ola_mundo(client):
 
 def test_post_user_returns_no_password(client):
     payload = dict(
-        username=str(uuid.uuid4()), email='b@gmail.com', password='c',
+        username=str(uuid.uuid4()),
+        email='b@gmail.com',
+        password='c',
     )
     resp = client.post('/users/', json=payload)
     assert 'password' not in resp.json()
@@ -31,7 +33,9 @@ def test_read_users_returns_200_and_list_of_users(client):
     # create some users
     for _ in range(10):
         payload = dict(
-            username=str(uuid.uuid4()), email='b@gmail.com', password='c',
+            username=str(uuid.uuid4()),
+            email='b@gmail.com',
+            password='c',
         )
         r = client.post('/users/', json=payload)
         assert r.status_code == 201
@@ -43,6 +47,7 @@ def test_read_users_returns_200_and_list_of_users(client):
 
 
 def test_update_user(client):
+    # "desativei" esse teste enquanto estava colocando o database
     return
     d = dict(username=str(uuid.uuid4()), email='k@gmail.com', password='1')
     resp = client.put('/users/1', json=d)
@@ -53,6 +58,7 @@ def test_update_user(client):
 
 
 def test_delete_user(client):
+    # "desativei" esse teste enquanto estava colocando o database
     return
     resp = client.delete('/users/1')
     assert resp.status_code == 200
